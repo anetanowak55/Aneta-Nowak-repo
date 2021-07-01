@@ -1,0 +1,41 @@
+
+0
+clean room
+2
+29-03-2021
+15
+0
+cook dinner
+1
+28-03-2021
+50
+0
+call doctor
+1
+30-03-2021
+10
+0
+tend the garden
+1
+31-03-2021
+90
+1
+go to post office
+2
+04-04-2021
+30
+1
+do groceries
+3
+31-03-2021
+90
+2
+complete project
+3
+15-04-2021
+120
+2
+send email
+1
+1-04-2021
+15

@@ -1,0 +1,46 @@
+
+0
+przygotuj obiad
+3
+30-04-2021
+45
+0
+upiecz ciasto
+2
+01-05-2021
+50
+0
+napraw kran
+3
+02-05-2021
+25
+1
+kup nowy odkurzacz
+2
+04-05-2021
+40
+1
+nakarm kaczki w parku
+0
+10-05-2021
+10
+1
+zrob zakupy
+1
+01-05-2021
+60
+2
+przygotuj dokumentacje
+2
+30-04-2021
+80
+2
+napraw drukarke
+2
+03-05-2021
+20
+2
+zrob kawe szefowi
+1
+06-05-2021
+10

@@ -1,0 +1,12 @@
+﻿  main.cpp
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskBase.h(55,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskBase.h(67,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskBase.h(79,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskManager.h(45,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskManager.h(53,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskManager.h(61,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\ui.h(67,23): warning C4129: ".": nierozpoznany znak sekwencji ucieczki
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\ui.h(154,23): warning C4129: ".": nierozpoznany znak sekwencji ucieczki
+C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\todo-list\TaskBase.h(89): warning C4715: "TaskBase::deleteTask”: niewszystkie ścieżki kodu zwracają wartość
+  todo-list.vcxproj -> C:\Users\aneta\source\repos\9f3b5267-gr11-repo\Projekt\todo-list\Debug\todo-list.exe
