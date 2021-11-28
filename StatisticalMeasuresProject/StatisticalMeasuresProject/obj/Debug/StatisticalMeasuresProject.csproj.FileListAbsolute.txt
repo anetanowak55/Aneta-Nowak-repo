@@ -1,0 +1,10 @@
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\bin\Debug\StatisticalMeasuresProject.exe.config
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\bin\Debug\StatisticalMeasuresProject.exe
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\bin\Debug\StatisticalMeasuresProject.pdb
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.csproj.AssemblyReference.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.Properties.Resources.resources
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.csproj.GenerateResource.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.csproj.CoreCompileInputs.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.exe
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.pdb
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\Debug\StatisticalMeasuresProject.Form1.resources
