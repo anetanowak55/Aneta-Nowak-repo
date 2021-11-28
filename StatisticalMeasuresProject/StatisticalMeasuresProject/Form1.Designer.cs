@@ -136,9 +136,24 @@ namespace StatisticalMeasuresProject
             // sampleNoNumericUpDown
             // 
             this.sampleNoNumericUpDown.Location = new System.Drawing.Point(62, 132);
+            this.sampleNoNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.sampleNoNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.sampleNoNumericUpDown.Name = "sampleNoNumericUpDown";
             this.sampleNoNumericUpDown.Size = new System.Drawing.Size(59, 22);
             this.sampleNoNumericUpDown.TabIndex = 13;
+            this.sampleNoNumericUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // chooseFileButton
             // 
@@ -206,9 +221,25 @@ namespace StatisticalMeasuresProject
             // threadNoNumerpicUpDown
             // 
             this.threadNoNumerpicUpDown.Location = new System.Drawing.Point(56, 89);
+            this.threadNoNumerpicUpDown.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.threadNoNumerpicUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.threadNoNumerpicUpDown.Name = "threadNoNumerpicUpDown";
             this.threadNoNumerpicUpDown.Size = new System.Drawing.Size(59, 22);
             this.threadNoNumerpicUpDown.TabIndex = 0;
+            this.threadNoNumerpicUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.threadNoNumerpicUpDown.ValueChanged += new System.EventHandler(this.threadNoNumerpicUpDown_ValueChanged);
             // 
             // groupBox4
             // 

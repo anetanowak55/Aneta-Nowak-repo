@@ -13,8 +13,7 @@ namespace StatisticalMeasuresProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form = new Form1();
-            Application.Run(form);
+            Application.Run(new Form1());
         }
     }
 }

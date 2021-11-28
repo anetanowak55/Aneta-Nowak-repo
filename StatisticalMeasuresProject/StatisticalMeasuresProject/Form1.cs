@@ -18,10 +18,12 @@ namespace StatisticalMeasuresProject
 
         int dataSource = 9; // 0 - csv, 1 - random
         int libraryChoice = 9; // 0 - c#, 1 - asm
+        int noThreads = 1;
 
         public Form1()
         {
             InitializeComponent();
+            textBox1.ReadOnly = true;
         }
 
         private void csvFileRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -42,6 +44,11 @@ namespace StatisticalMeasuresProject
         private void assemblyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             libraryChoice = 1;
+        }
+
+        private void threadNoNumerpicUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            noThreads = Decimal.ToInt32(threadNoNumerpicUpDown.Value);
         }
 
         private void displayOutputCs(double stdValue)
@@ -65,7 +72,7 @@ namespace StatisticalMeasuresProject
                 {
                     if (libraryChoice == 0) // C#
                     {
-                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo);
+                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads);
                         displayOutputCs(stdValue);
                     }
                     else if (libraryChoice == 1) // Asm
@@ -93,5 +100,7 @@ namespace StatisticalMeasuresProject
                 textBox1.Text += "No source of data was chosen." + "\r\n";
             }
         }
+
+        
     }
 }
