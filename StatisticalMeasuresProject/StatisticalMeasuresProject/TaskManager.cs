@@ -25,10 +25,54 @@ namespace StatisticalMeasuresProject
             int leftoverRecords = arrayLength % threadsNo;
 
             int start = 0;
-            for (int i = 0; i < threadsNo; i++)
+            if (leftoverRecords != 0)
+            {
+                Task firstTask = new Task(() => { StdDev.calculateArraySum(array, start, start + recordsPerThread + leftoverRecords, ref result); });
+                taskList.Add(firstTask);
+            }
+            else
+            {
+                Task firstTask = new Task(() => { StdDev.calculateArraySum(array, start, start + recordsPerThread, ref result); });
+                taskList.Add(firstTask);
+            }
+
+            for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
                 Task task = new Task(() => { StdDev.calculateArraySum(array, start_cpy, start_cpy + recordsPerThread, ref result); });
+                taskList.Add(task);
+                start += recordsPerThread;
+            }
+
+        }
+
+        public static void calculateStdDevTasks(int threadsNo, double[] array, double avg, int added_zeros)
+        {
+            taskList.Clear();
+
+            int arrayLength = array.Length - added_zeros;
+            if (threadsNo > arrayLength)
+                threadsNo = arrayLength;
+
+            int recordsPerThread = arrayLength / threadsNo;
+            int leftoverRecords = arrayLength % threadsNo;
+
+            int start = 0;
+            if (leftoverRecords != 0)
+            {
+                Task firstTask = new Task(() => { StdDev.calculateDev(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                taskList.Add(firstTask);
+            }
+            else
+            {
+                Task firstTask = new Task(() => { StdDev.calculateDev(array, avg, start, start + recordsPerThread, ref result); });
+                taskList.Add(firstTask);
+            }
+
+            for (int i = 1; i < threadsNo; i++)
+            {
+                int start_cpy = start;
+                Task task = new Task(() => { StdDev.calculateDev(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
                 taskList.Add(task);
                 start += recordsPerThread;
             }
@@ -43,7 +87,9 @@ namespace StatisticalMeasuresProject
             {
                 arr[i].Start();
             }
-            Task.WaitAll(arr);
+            Task.WaitAll(arr); // tu pojawia sie blad przy uzyciu biblioteki asm
+                               // komunikat: "W bibliotece DLL '...' nie można znaleźć punktu wejścia o nazwie 'StdAsm'."
+
 
             return result;
         }

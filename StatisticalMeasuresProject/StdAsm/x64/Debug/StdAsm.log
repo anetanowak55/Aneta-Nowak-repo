@@ -1,0 +1,4 @@
+﻿  Assembling StdAsm.asm...
+     Creating library C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.lib and object C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.exp
+StdAsm.exp : warning LNK4070: /OUT:AsmStd.dll directive in .EXP differs from output filename 'C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.dll'; ignoring directive
+  StdAsm.vcxproj -> C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.dll

@@ -1,0 +1,2 @@
+LIBRARY SumAsm
+EXPORTS SumAsm

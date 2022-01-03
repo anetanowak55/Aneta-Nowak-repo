@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace StatisticalMeasuresProject
 {
     public partial class Form1 : Form
     {
-        [DllImport(@"C:\Users\aneta\source\repos\AsmProjekt\x64\Debug\AsmStd.dll")]
-        static extern int StdDevAsm(int a, int b);
-
         int dataSource = 9; // 0 - csv, 1 - random
         int libraryChoice = 9; // 0 - c#, 1 - asm
         int noThreads = 1;
+        TimeSpan time;
 
         public Form1()
         {
@@ -53,12 +51,12 @@ namespace StatisticalMeasuresProject
 
         private void displayOutputCs(double stdValue)
         {
-            textBox1.Text += "Library: C#; Time: xx; Output: std=" + stdValue.ToString() + "\r\n";
+            textBox1.Text += "Library: C#; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + stdValue.ToString() + "\r\n";
         }
 
         private void displayOutputAsm(double stdValue)
         {
-            textBox1.Text += "Library: Asm; Time: xx; Output: std=" + stdValue.ToString() + "\r\n";
+            textBox1.Text += "Library: Asm; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + stdValue.ToString() + "\r\n";
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -72,14 +70,27 @@ namespace StatisticalMeasuresProject
                 {
                     if (libraryChoice == 0) // C#
                     {
-                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads);
+                        Stopwatch stopWatch = new Stopwatch();
+                        stopWatch.Start();
+
+                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads, false);
+
+                        stopWatch.Stop();
+                        time = stopWatch.Elapsed;
+
                         displayOutputCs(stdValue);
                     }
                     else if (libraryChoice == 1) // Asm
                     {
-                        int x = 5, y = 3;
-                        int retVal = StdDevAsm(x, y);
-                        displayOutputAsm((double)retVal);
+                        Stopwatch stopWatch = new Stopwatch();
+                        stopWatch.Start();
+
+                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads, true);
+
+                        stopWatch.Stop();
+                        time = stopWatch.Elapsed;
+
+                        displayOutputAsm(stdValue);
                     }
                     else
                     {
@@ -93,7 +104,34 @@ namespace StatisticalMeasuresProject
             }
             else if (dataSource == 0) // data from a csv file
             {
-                // TODO: data from csv file
+                if (libraryChoice == 0) // C#
+                {
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+
+                    double stdValue = std.calculateStdDevFromCsv(noThreads, false);
+
+                    stopWatch.Stop();
+                    time = stopWatch.Elapsed;
+
+                    displayOutputCs(stdValue);
+                }
+                else if (libraryChoice == 1) // Asm
+                {
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
+
+                    double stdValue = std.calculateStdDevFromCsv(noThreads, true);
+
+                    stopWatch.Stop();
+                    time = stopWatch.Elapsed;
+
+                    displayOutputAsm(stdValue);
+                }
+                else
+                {
+                    textBox1.Text += "No library was chosen." + "\r\n";
+                }
             }
             else
             {
