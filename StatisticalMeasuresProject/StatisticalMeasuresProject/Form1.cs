@@ -49,14 +49,16 @@ namespace StatisticalMeasuresProject
             noThreads = Decimal.ToInt32(threadNoNumerpicUpDown.Value);
         }
 
-        private void displayOutputCs(double stdValue)
+        private void displayOutputCs(double[] results)
         {
-            textBox1.Text += "Library: C#; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + stdValue.ToString() + "\r\n";
+            textBox1.Text += "Library: C#; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + results[0].ToString()
+                + ", aad=" + results[1].ToString() + ", cv=" + results[2].ToString() + "\r\n";
         }
 
-        private void displayOutputAsm(double stdValue)
+        private void displayOutputAsm(double[] results)
         {
-            textBox1.Text += "Library: Asm; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + stdValue.ToString() + "\r\n";
+            textBox1.Text += "Library: Asm; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + results[0].ToString() 
+                + ", aad=" + results[1].ToString() + ", cv=" + results[2].ToString() + "\r\n";
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -73,24 +75,24 @@ namespace StatisticalMeasuresProject
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        double stdValue = statCal.calculateStdDevOfRandomSample(sampleNo, noThreads, false);
+                        double[] results = statCal.statCalRndSample(sampleNo, noThreads, false);
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
 
-                        displayOutputCs(stdValue);
+                        displayOutputCs(results);
                     }
                     else if (libraryChoice == 1) // Asm
                     {
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        double stdValue = statCal.calculateStdDevOfRandomSample(sampleNo, noThreads, true);
+                        double[] results = statCal.statCalRndSample(sampleNo, noThreads, true);
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
 
-                        displayOutputAsm(stdValue);
+                        displayOutputAsm(results);
                     }
                     else
                     {
@@ -109,24 +111,24 @@ namespace StatisticalMeasuresProject
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    double stdValue = statCal.calculateStdDevFromCsv(noThreads, false);
+                    double[] results = statCal.statCalFromCsv(noThreads, false);
 
                     stopWatch.Stop();
                     time = stopWatch.Elapsed;
 
-                    displayOutputCs(stdValue);
+                    displayOutputCs(results);
                 }
                 else if (libraryChoice == 1) // Asm
                 {
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    double stdValue = statCal.calculateStdDevFromCsv(noThreads, true);
+                    double[] results = statCal.statCalFromCsv(noThreads, true);
 
                     stopWatch.Stop();
                     time = stopWatch.Elapsed;
 
-                    displayOutputAsm(stdValue);
+                    displayOutputAsm(results);
                 }
                 else
                 {

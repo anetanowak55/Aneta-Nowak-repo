@@ -77,6 +77,15 @@ namespace StatisticalMeasuresProject
             return result;
         }
 
+        /**
+         * Modifies values in an array and sums them - a task for one of the threads.
+         * 
+         * @param array Array of values to be used for calculations
+         * @param avg Average of values in the array.
+         * @param start Starting point.
+         * @param end Finishing point.
+         * @param result A partial result.
+         */
         public static void calculateDev(double[] array, double avg, int start, int end, ref double result)
         {
             if (is_asm == false)
@@ -96,13 +105,14 @@ namespace StatisticalMeasuresProject
         }
 
         /**
-         * Calculates standard deviation of a random sample for demostrative purposes.
+         * Calculates satistical measures of a random sample for demostrative purposes.
          * 
          * @param sample_size Number of random values to be generated.
-         * @param no_threads Number of threads to be used for executing calculations.
-         * @returns Value of the standard deviation.
+         * @param no_thread Number of threads to be used for executing calculations.
+         * @param asm Boolean value indicating if the asm library should be used.
+         * @returns double[] array of results
          */
-        public double calculateStdDevOfRandomSample(int sample_size, int no_thread, bool asm)
+        public double[] statCalRndSample(int sample_size, int no_thread, bool asm)
         {
             is_asm = asm;
             no_threads = no_thread;
@@ -127,18 +137,30 @@ namespace StatisticalMeasuresProject
             for (int i = 0; i < array.Length; i++)
                 Console.WriteLine(array[i] + " ");
 
-            return calculateStdDev(array);
+            double[] results = new double[3];
+            results[0] = calculateStdDev(array);
+            results[1] = 0;
+            results[2] = 0;
+
+            return results;
         }
 
-        public double calculateStdDevFromCsv(int no_thread, bool asm)
+        /**
+         * Calculates satistical measures of a sample represented in a csv file.
+         * 
+         * @param no_thread Number of threads to be used for executing calculations.
+         * @param asm Boolean value indicating if the asm library should be used.
+         * @returns double[] array of results
+         */
+        public double[] statCalFromCsv(int no_thread, bool asm)
         {
             is_asm = asm;
             no_threads = no_thread;
             CsvParser csvParser = new CsvParser();
             string file_name = @"C:\Users\aneta\Desktop\data.csv";
 
-            List <double> list = csvParser.readCsv(file_name);
-            
+            List<double> list = csvParser.readCsv(file_name);
+
             if (list.Count % 4 != 0)
             {
                 added_zeros = 4 - list.Count % 4;
@@ -150,7 +172,12 @@ namespace StatisticalMeasuresProject
 
             double[] array = csvParser.listToArray(list);
 
-            return calculateStdDev(array);
+            double[] results = new double[3];
+            results[0] = calculateStdDev(array);
+            results[1] = 0;
+            results[2] = 0;
+
+            return results;
         }
     }
 }

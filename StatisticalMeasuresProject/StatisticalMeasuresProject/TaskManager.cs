@@ -8,8 +8,6 @@ namespace StatisticalMeasuresProject
 {
     class TaskManager : StatCal
     {
-        private static int threadsNo;
-        private static int arrayLength;
         private static List<Task> taskList = new List<Task>();
         private static double result = 0;
 
@@ -87,9 +85,7 @@ namespace StatisticalMeasuresProject
             {
                 arr[i].Start();
             }
-            Task.WaitAll(arr); // tu pojawia sie blad przy uzyciu biblioteki asm
-                               // komunikat: "W bibliotece DLL '...' nie można znaleźć punktu wejścia o nazwie 'StdAsm'."
-
+            Task.WaitAll(arr);
 
             return result;
         }

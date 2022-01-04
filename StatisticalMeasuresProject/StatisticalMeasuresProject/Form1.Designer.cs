@@ -267,9 +267,9 @@ namespace StatisticalMeasuresProject
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(45, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(141, 17);
+            this.label5.Size = new System.Drawing.Size(171, 21);
             this.label5.TabIndex = 4;
-            this.label5.Text = "1. standard deviation";
+            this.label5.Text = "2. average deviation";
             // 
             // textBox1
             // 
