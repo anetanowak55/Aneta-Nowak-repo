@@ -16,7 +16,9 @@ namespace StatisticalMeasuresProject
         int dataSource = 9; // 0 - csv, 1 - random
         int libraryChoice = 9; // 0 - c#, 1 - asm
         int noThreads = 1;
+        int noIterations = 1;
         TimeSpan time;
+        double timeNumeric;
 
         public Form1()
         {
@@ -49,15 +51,20 @@ namespace StatisticalMeasuresProject
             noThreads = Decimal.ToInt32(threadNoNumerpicUpDown.Value);
         }
 
+        private void noIterationsNumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            noIterations = Decimal.ToInt32(noIterationsNumericUpDown1.Value);
+        }
+
         private void displayOutputCs(double[] results)
         {
-            textBox1.Text += "Library: C#; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + results[0].ToString()
+            textBox1.Text += "Library: C#; Time: " + timeNumeric.ToString() + " ms; Output: std=" + results[0].ToString()
                 + ", aad=" + results[1].ToString() + ", cv=" + results[2].ToString() + "\r\n";
         }
 
         private void displayOutputAsm(double[] results)
         {
-            textBox1.Text += "Library: Asm; Time: " + time.TotalMilliseconds.ToString() + " ms; Output: std=" + results[0].ToString() 
+            textBox1.Text += "Library: Asm; Time: " + timeNumeric.ToString() + " ms; Output: std=" + results[0].ToString() 
                 + ", aad=" + results[1].ToString() + ", cv=" + results[2].ToString() + "\r\n";
         }
 
@@ -72,26 +79,36 @@ namespace StatisticalMeasuresProject
                 {
                     if (libraryChoice == 0) // C#
                     {
-                        Stopwatch stopWatch = new Stopwatch();
-                        stopWatch.Start();
+                        double[] results = new double[3];
+                        for (int i = 0; i < noIterations; i++)
+                        {
+                            Stopwatch stopWatch = new Stopwatch();
+                            stopWatch.Start();
 
-                        double[] results = statCal.statCalRndSample(sampleNo, noThreads, false);
+                            results = statCal.statCalRndSample(sampleNo, noThreads, false);
 
-                        stopWatch.Stop();
-                        time = stopWatch.Elapsed;
+                            stopWatch.Stop();
+                            time += stopWatch.Elapsed;
+                        }
 
+                        timeNumeric = time.TotalMilliseconds / noIterations;
                         displayOutputCs(results);
                     }
                     else if (libraryChoice == 1) // Asm
                     {
-                        Stopwatch stopWatch = new Stopwatch();
-                        stopWatch.Start();
+                        double[] results = new double[3];
+                        for (int i = 0; i < noIterations; i++)
+                        {
+                            Stopwatch stopWatch = new Stopwatch();
+                            stopWatch.Start();
 
-                        double[] results = statCal.statCalRndSample(sampleNo, noThreads, true);
+                            results = statCal.statCalRndSample(sampleNo, noThreads, true);
 
-                        stopWatch.Stop();
-                        time = stopWatch.Elapsed;
+                            stopWatch.Stop();
+                            time = stopWatch.Elapsed;
+                        }
 
+                        timeNumeric = time.TotalMilliseconds / noIterations;
                         displayOutputAsm(results);
                     }
                     else
@@ -108,26 +125,36 @@ namespace StatisticalMeasuresProject
             {
                 if (libraryChoice == 0) // C#
                 {
-                    Stopwatch stopWatch = new Stopwatch();
-                    stopWatch.Start();
+                    double[] results = new double[3];
+                    for (int i = 0; i < noIterations; i++)
+                    {
+                        Stopwatch stopWatch = new Stopwatch();
+                        stopWatch.Start();
 
-                    double[] results = statCal.statCalFromCsv(noThreads, false);
+                        results = statCal.statCalFromCsv(noThreads, false);
 
-                    stopWatch.Stop();
-                    time = stopWatch.Elapsed;
+                        stopWatch.Stop();
+                        time = stopWatch.Elapsed;
+                    }
 
+                    timeNumeric = time.TotalMilliseconds / noIterations;
                     displayOutputCs(results);
                 }
                 else if (libraryChoice == 1) // Asm
                 {
-                    Stopwatch stopWatch = new Stopwatch();
-                    stopWatch.Start();
+                    double[] results = new double[3];
+                    for (int i = 0; i < noIterations; i++)
+                    {
+                        Stopwatch stopWatch = new Stopwatch();
+                        stopWatch.Start();
 
-                    double[] results = statCal.statCalFromCsv(noThreads, true);
+                        results = statCal.statCalFromCsv(noThreads, true);
 
-                    stopWatch.Stop();
-                    time = stopWatch.Elapsed;
+                        stopWatch.Stop();
+                        time = stopWatch.Elapsed;
+                    }
 
+                    timeNumeric = time.TotalMilliseconds / noIterations;
                     displayOutputAsm(results);
                 }
                 else
@@ -140,7 +167,5 @@ namespace StatisticalMeasuresProject
                 textBox1.Text += "No source of data was chosen." + "\r\n";
             }
         }
-
-        
     }
 }

@@ -58,19 +58,51 @@ namespace StatisticalMeasuresProject
             int start = 0;
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StatCal.calculateDev(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
                 taskList.Add(firstTask);
             }
             else
             {
-                Task firstTask = new Task(() => { StatCal.calculateDev(array, avg, start, start + recordsPerThread, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start, start + recordsPerThread, ref result); });
                 taskList.Add(firstTask);
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StatCal.calculateDev(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
+                Task task = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
+                taskList.Add(task);
+                start += recordsPerThread;
+            }
+        }
+
+        public static void calculateAvgDevTasks(int threadsNo, double[] array, double avg, int added_zeros)
+        {
+            taskList.Clear();
+
+            int arrayLength = array.Length - added_zeros;
+            if (threadsNo > arrayLength)
+                threadsNo = arrayLength;
+
+            int recordsPerThread = arrayLength / threadsNo;
+            int leftoverRecords = arrayLength % threadsNo;
+
+            int start = 0;
+            if (leftoverRecords != 0)
+            {
+                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                taskList.Add(firstTask);
+            }
+            else
+            {
+                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start, start + recordsPerThread, ref result); });
+                taskList.Add(firstTask);
+            }
+
+            for (int i = 1; i < threadsNo; i++)
+            {
+                int start_cpy = start;
+                Task task = new Task(() => { StatCal.calculateSumOfDif(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
                 taskList.Add(task);
                 start += recordsPerThread;
             }

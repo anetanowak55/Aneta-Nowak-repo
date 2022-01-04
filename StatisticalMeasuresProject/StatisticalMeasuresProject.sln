@@ -4,13 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticalMeasuresProject", "StatisticalMeasuresProject\StatisticalMeasuresProject.csproj", "{7D4585F6-0FC0-4761-BA28-7D3DAEF2F251}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StdAsm", "StdAsm\StdAsm.vcxproj", "{EE124A7F-AAF0-41F8-A4A5-80EEA1A8F8D0}"
 	ProjectSection(ProjectDependencies) = postProject
-		{7D4585F6-0FC0-4761-BA28-7D3DAEF2F251} = {7D4585F6-0FC0-4761-BA28-7D3DAEF2F251}
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946} = {AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}
+		{EE124A7F-AAF0-41F8-A4A5-80EEA1A8F8D0} = {EE124A7F-AAF0-41F8-A4A5-80EEA1A8F8D0}
+		{CE14CBC2-4E92-4423-A709-A60E2BB22F51} = {CE14CBC2-4E92-4423-A709-A60E2BB22F51}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StdAsm", "StdAsm\StdAsm.vcxproj", "{EE124A7F-AAF0-41F8-A4A5-80EEA1A8F8D0}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SumAsm", "SumAsm\SumAsm.vcxproj", "{CE14CBC2-4E92-4423-A709-A60E2BB22F51}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AvgAsm", "AvgAsm\AvgAsm.vcxproj", "{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,16 @@ Global
 		{CE14CBC2-4E92-4423-A709-A60E2BB22F51}.Release|x64.Build.0 = Release|x64
 		{CE14CBC2-4E92-4423-A709-A60E2BB22F51}.Release|x86.ActiveCfg = Release|Win32
 		{CE14CBC2-4E92-4423-A709-A60E2BB22F51}.Release|x86.Build.0 = Release|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Debug|x64.ActiveCfg = Debug|x64
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Debug|x64.Build.0 = Debug|x64
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Debug|x86.Build.0 = Debug|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Release|Any CPU.ActiveCfg = Release|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Release|x64.ActiveCfg = Release|x64
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Release|x64.Build.0 = Release|x64
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Release|x86.ActiveCfg = Release|Win32
+		{AD1EA05C-AD00-4FE0-B957-FA4D47DA1946}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

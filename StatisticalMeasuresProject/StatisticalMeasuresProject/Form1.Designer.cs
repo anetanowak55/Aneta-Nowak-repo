@@ -48,12 +48,17 @@ namespace StatisticalMeasuresProject
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.noIterationsNumericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleNoNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.threadNoNumerpicUpDown)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noIterationsNumericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // calculateButton
@@ -248,7 +253,7 @@ namespace StatisticalMeasuresProject
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Location = new System.Drawing.Point(60, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(672, 90);
+            this.groupBox4.Size = new System.Drawing.Size(439, 90);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "This program calculates the following statistical measures:";
@@ -258,18 +263,18 @@ namespace StatisticalMeasuresProject
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(45, 62);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(141, 17);
+            this.label6.Size = new System.Drawing.Size(162, 17);
             this.label6.TabIndex = 5;
-            this.label6.Text = "1. standard deviation";
+            this.label6.Text = "3. coefficient of variation";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(45, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(171, 21);
+            this.label5.Size = new System.Drawing.Size(195, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "2. average deviation";
+            this.label5.Text = "2. average absolute deviation";
             // 
             // textBox1
             // 
@@ -279,11 +284,55 @@ namespace StatisticalMeasuresProject
             this.textBox1.Size = new System.Drawing.Size(672, 81);
             this.textBox1.TabIndex = 14;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.noIterationsNumericUpDown1);
+            this.groupBox5.Location = new System.Drawing.Point(532, 18);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 84);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Choose no. of iterations:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 17);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "max value is 10 000";
+            // 
+            // noIterationsNumericUpDown1
+            // 
+            this.noIterationsNumericUpDown1.Location = new System.Drawing.Point(57, 42);
+            this.noIterationsNumericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.noIterationsNumericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noIterationsNumericUpDown1.Name = "noIterationsNumericUpDown1";
+            this.noIterationsNumericUpDown1.Size = new System.Drawing.Size(59, 22);
+            this.noIterationsNumericUpDown1.TabIndex = 0;
+            this.noIterationsNumericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noIterationsNumericUpDown1.ValueChanged += new System.EventHandler(this.noIterationsNumericUpDown1_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 494);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -302,6 +351,9 @@ namespace StatisticalMeasuresProject
             ((System.ComponentModel.ISupportInitialize)(this.threadNoNumerpicUpDown)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noIterationsNumericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,6 +380,9 @@ namespace StatisticalMeasuresProject
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown noIterationsNumericUpDown1;
     }
 }
 

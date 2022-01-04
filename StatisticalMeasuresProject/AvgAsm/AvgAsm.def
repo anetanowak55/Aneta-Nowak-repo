@@ -1,0 +1,2 @@
+LIBRARY AvgAsm
+EXPORTS AvgDevAsm

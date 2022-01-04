@@ -14,10 +14,14 @@ namespace StatisticalMeasuresProject
         static extern double SumAsm(double[] array, int start, int end, ref double result);
         [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.dll")]
         static extern double StdDevAsm(double[] array, double avg, int start, int end, ref double result);
+        [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\AvgAsm.dll")]
+        static extern double AvgDevAsm(double[] array, double avg, int start, int end, ref double result);
 
         public static bool is_asm;
         static int no_threads;
         static int added_zeros = 0;
+        double array_avg = 0;
+        readonly int no_decimal_places = 4;
 
         /**
          * Calculates the sum of values in an array - a task for one of the threads.
@@ -64,12 +68,12 @@ namespace StatisticalMeasuresProject
          * @param no_threads Number of threads to be used for executing calculations.
          * @returns Value of the standard deviation.
          */
-        public double calculateStdDev(double[] array)
+        private double calculateStdDev(double[] array)
         {
             double result = 0;
-            double avg = calculateArrayAverage(array);
+            array_avg = calculateArrayAverage(array);
 
-            TaskManager.calculateStdDevTasks(no_threads, array, avg, added_zeros);
+            TaskManager.calculateStdDevTasks(no_threads, array, array_avg, added_zeros);
             double squares_sum = TaskManager.start();
 
             result = Math.Sqrt(squares_sum / (array.Length - added_zeros));
@@ -78,7 +82,22 @@ namespace StatisticalMeasuresProject
         }
 
         /**
-         * Modifies values in an array and sums them - a task for one of the threads.
+         * Calculates average absolute deviation of a given sample.
+         * 
+         * @param array Array of values to be used for calculating aad.
+         * @param no_threads Number of threads to be used for executing calculations.
+         * @returns Value of the average absolute deviation.
+         */
+        private double calculateAvgDev(double[] array)
+        {
+            TaskManager.calculateAvgDevTasks(no_threads, array, array_avg, added_zeros);
+            double dif_sum = TaskManager.start();
+
+            return dif_sum / (array.Length - added_zeros);
+        }
+
+        /**
+         * Calculates the sum of differences - a task for one of the threads.
          * 
          * @param array Array of values to be used for calculations
          * @param avg Average of values in the array.
@@ -86,7 +105,34 @@ namespace StatisticalMeasuresProject
          * @param end Finishing point.
          * @param result A partial result.
          */
-        public static void calculateDev(double[] array, double avg, int start, int end, ref double result)
+        public static void calculateSumOfDif(double[] array, double avg, int start, int end, ref double result)
+        {
+            if (is_asm == false)
+            {
+                for (int i = start; i < end; i++)
+                {
+                    result += Math.Abs(array[i] - avg);
+                }
+            }
+            else
+            {
+                result = AvgDevAsm(array, avg, start, end, ref result);
+
+                double zeros_adjustment = added_zeros * avg;
+                result -= zeros_adjustment;
+            }
+        }
+
+        /**
+         * Calculates the sum of squared differences - a task for one of the threads.
+         * 
+         * @param array Array of values to be used for calculations
+         * @param avg Average of values in the array.
+         * @param start Starting point.
+         * @param end Finishing point.
+         * @param result A partial result.
+         */
+        public static void calculateSumOfSqDif(double[] array, double avg, int start, int end, ref double result)
         {
             if (is_asm == false)
             {
@@ -138,9 +184,9 @@ namespace StatisticalMeasuresProject
                 Console.WriteLine(array[i] + " ");
 
             double[] results = new double[3];
-            results[0] = calculateStdDev(array);
-            results[1] = 0;
-            results[2] = 0;
+            results[0] = Math.Round(calculateStdDev(array), no_decimal_places);
+            results[1] = Math.Round(calculateAvgDev(array), no_decimal_places);
+            results[2] = Math.Round(results[0] / array_avg, no_decimal_places);
 
             return results;
         }
@@ -173,9 +219,9 @@ namespace StatisticalMeasuresProject
             double[] array = csvParser.listToArray(list);
 
             double[] results = new double[3];
-            results[0] = calculateStdDev(array);
-            results[1] = 0;
-            results[2] = 0;
+            results[0] = Math.Round(calculateStdDev(array), no_decimal_places);
+            results[1] = Math.Round(calculateAvgDev(array), no_decimal_places);
+            results[2] = Math.Round(results[0] / array_avg, no_decimal_places);
 
             return results;
         }
