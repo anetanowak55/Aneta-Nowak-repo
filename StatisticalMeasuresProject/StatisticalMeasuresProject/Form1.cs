@@ -61,7 +61,7 @@ namespace StatisticalMeasuresProject
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
-            StdDev std = new StdDev();
+            StatCal statCal = new StatCal();
 
             if (dataSource == 1) // random sample
             {
@@ -73,7 +73,7 @@ namespace StatisticalMeasuresProject
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads, false);
+                        double stdValue = statCal.calculateStdDevOfRandomSample(sampleNo, noThreads, false);
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
@@ -85,7 +85,7 @@ namespace StatisticalMeasuresProject
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        double stdValue = std.calculateStdDevOfRandomSample(sampleNo, noThreads, true);
+                        double stdValue = statCal.calculateStdDevOfRandomSample(sampleNo, noThreads, true);
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
@@ -109,7 +109,7 @@ namespace StatisticalMeasuresProject
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    double stdValue = std.calculateStdDevFromCsv(noThreads, false);
+                    double stdValue = statCal.calculateStdDevFromCsv(noThreads, false);
 
                     stopWatch.Stop();
                     time = stopWatch.Elapsed;
@@ -121,7 +121,7 @@ namespace StatisticalMeasuresProject
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    double stdValue = std.calculateStdDevFromCsv(noThreads, true);
+                    double stdValue = statCal.calculateStdDevFromCsv(noThreads, true);
 
                     stopWatch.Stop();
                     time = stopWatch.Elapsed;

@@ -8,12 +8,12 @@ using System.Diagnostics;
 
 namespace StatisticalMeasuresProject
 {
-    class StdDev
+    class StatCal
     {
         [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\SumAsm.dll")]
         static extern double SumAsm(double[] array, int start, int end, ref double result);
-        [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\SumAsm.dll")]
-        static extern double StdAsm(double[] array, double avg, int start, int end, ref double result);
+        [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.dll")]
+        static extern double StdDevAsm(double[] array, double avg, int start, int end, ref double result);
 
         public static bool is_asm;
         static int no_threads;
@@ -88,7 +88,10 @@ namespace StatisticalMeasuresProject
             }
             else
             {
-                result = StdAsm(array, avg, start, end, ref result); 
+                result = StdDevAsm(array, avg, start, end, ref result); 
+
+                double zeros_adjustment = added_zeros * Math.Pow(0 - avg, 2);
+                result -= zeros_adjustment;
             }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StatisticalMeasuresProject
 {
-    class TaskManager : StdDev
+    class TaskManager : StatCal
     {
         private static int threadsNo;
         private static int arrayLength;
@@ -27,19 +27,19 @@ namespace StatisticalMeasuresProject
             int start = 0;
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StdDev.calculateArraySum(array, start, start + recordsPerThread + leftoverRecords, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start, start + recordsPerThread + leftoverRecords, ref result); });
                 taskList.Add(firstTask);
             }
             else
             {
-                Task firstTask = new Task(() => { StdDev.calculateArraySum(array, start, start + recordsPerThread, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start, start + recordsPerThread, ref result); });
                 taskList.Add(firstTask);
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StdDev.calculateArraySum(array, start_cpy, start_cpy + recordsPerThread, ref result); });
+                Task task = new Task(() => { StatCal.calculateArraySum(array, start_cpy, start_cpy + recordsPerThread, ref result); });
                 taskList.Add(task);
                 start += recordsPerThread;
             }
@@ -60,19 +60,19 @@ namespace StatisticalMeasuresProject
             int start = 0;
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StdDev.calculateDev(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateDev(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
                 taskList.Add(firstTask);
             }
             else
             {
-                Task firstTask = new Task(() => { StdDev.calculateDev(array, avg, start, start + recordsPerThread, ref result); });
+                Task firstTask = new Task(() => { StatCal.calculateDev(array, avg, start, start + recordsPerThread, ref result); });
                 taskList.Add(firstTask);
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StdDev.calculateDev(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
+                Task task = new Task(() => { StatCal.calculateDev(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
                 taskList.Add(task);
                 start += recordsPerThread;
             }
