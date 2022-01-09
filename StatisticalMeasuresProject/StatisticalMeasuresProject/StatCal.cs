@@ -203,7 +203,7 @@ namespace StatisticalMeasuresProject
             is_asm = asm;
             no_threads = no_thread;
             CsvParser csvParser = new CsvParser();
-            string file_name = @"C:\Users\aneta\Desktop\data.csv";
+            string file_name = @"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\csv_files\data1.csv";
 
             List<double> list = csvParser.readCsv(file_name);
 

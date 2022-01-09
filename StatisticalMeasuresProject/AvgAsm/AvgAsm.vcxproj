@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AvgAsm.asm" />
+    <MASM Include="AvgAsm.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <None Include="AvgAsm.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

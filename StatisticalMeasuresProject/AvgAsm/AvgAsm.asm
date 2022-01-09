@@ -10,6 +10,7 @@ AvgDevAsm proc
 
 MOV RAX, R8
 VBROADCASTSD YMM3, XMM1				; broadcast a floating point value from XMM1 to four locations in YMM3
+VXORPS ymm9, ymm9, ymm9				; make sure ymm9 is empty
 
 add_records_loop:
 	CMP RAX, R9						; check if reached the end
@@ -19,9 +20,11 @@ add_records_loop:
 	ADD RCX, 32						; add 32 to array pointer -> move 4 records forward
 
 	VSUBPD YMM4, YMM2, YMM3			; substract avg from every element from the list -> substract YMM3 from YMM2 and save to YMM4
-	FABS YMM4						; clears the sign bit - makes YMM4 value absolute
+	VXORPS  ymm8, ymm8, ymm8		; make sure ymm8 is empty
+	VSUBPD  ymm8, ymm9, ymm4		; substract ymm4 from an empty register
+	VANDPD  ymm4, ymm4, ymm8		; bitwise logical and - produces an absolute value of original ymm4 values
 
-	VADDPD YMM7, YMM5, YMM6			; add YMM5 to YMM6 and store the result in YMM7
+	VADDPD YMM7, YMM4, YMM6			; add YMM4 to YMM6 and store the result in YMM7
 	VMOVDQU YMM6, YMM7				; copy the contents of YMM7 to YMM6
 	JMP add_records_loop
 

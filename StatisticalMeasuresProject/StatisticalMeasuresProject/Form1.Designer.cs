@@ -306,6 +306,11 @@ namespace StatisticalMeasuresProject
             // 
             // noIterationsNumericUpDown1
             // 
+            this.noIterationsNumericUpDown1.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.noIterationsNumericUpDown1.Location = new System.Drawing.Point(57, 42);
             this.noIterationsNumericUpDown1.Maximum = new decimal(new int[] {
             10000,
@@ -321,7 +326,7 @@ namespace StatisticalMeasuresProject
             this.noIterationsNumericUpDown1.Size = new System.Drawing.Size(59, 22);
             this.noIterationsNumericUpDown1.TabIndex = 0;
             this.noIterationsNumericUpDown1.Value = new decimal(new int[] {
-            1,
+            1000,
             0,
             0,
             0});
