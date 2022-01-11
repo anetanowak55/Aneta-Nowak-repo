@@ -168,6 +168,7 @@ namespace StatisticalMeasuresProject
             this.chooseFileButton.TabIndex = 2;
             this.chooseFileButton.Text = "Choose file";
             this.chooseFileButton.UseVisualStyleBackColor = true;
+            this.chooseFileButton.Click += new System.EventHandler(this.chooseFileButton_Click);
             // 
             // randSampleRadioButton
             // 
@@ -281,7 +282,7 @@ namespace StatisticalMeasuresProject
             this.textBox1.Location = new System.Drawing.Point(60, 387);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(672, 81);
+            this.textBox1.Size = new System.Drawing.Size(672, 231);
             this.textBox1.TabIndex = 14;
             // 
             // groupBox5
@@ -336,7 +337,7 @@ namespace StatisticalMeasuresProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 494);
+            this.ClientSize = new System.Drawing.Size(800, 650);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox4);

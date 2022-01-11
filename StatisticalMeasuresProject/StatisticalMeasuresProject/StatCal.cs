@@ -198,14 +198,13 @@ namespace StatisticalMeasuresProject
          * @param asm Boolean value indicating if the asm library should be used.
          * @returns double[] array of results
          */
-        public double[] statCalFromCsv(int no_thread, bool asm)
+        public double[] statCalFromCsv(int no_thread, bool asm, string filePath)
         {
             is_asm = asm;
-            no_threads = no_thread;
+            no_threads = no_thread; 
             CsvParser csvParser = new CsvParser();
-            string file_name = @"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\csv_files\data1.csv";
 
-            List<double> list = csvParser.readCsv(file_name);
+            List<double> list = csvParser.readCsv(filePath);
 
             if (list.Count % 4 != 0)
             {

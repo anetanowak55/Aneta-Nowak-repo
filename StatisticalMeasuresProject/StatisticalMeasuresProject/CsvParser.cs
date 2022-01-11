@@ -13,12 +13,28 @@ namespace StatisticalMeasuresProject
         {
             List<double> list = new List<double>();
 
-            var reader = new StreamReader(@file_name);
-            while (!reader.EndOfStream)
+            try
             {
-                var line = reader.ReadLine();
-                double record = Convert.ToDouble(line);
-                list.Add(record);
+                var reader = new StreamReader(@file_name);
+                double record = 0;
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    string[] tokens = line.Split(';');
+                    foreach (string s in tokens)
+                    {
+                        if (double.TryParse(s, out record))
+                            list.Add(record);
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                throw e;
+            }
+            catch (ArgumentException e)
+            {
+                throw e;
             }
 
             return list;

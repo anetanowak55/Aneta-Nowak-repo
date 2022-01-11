@@ -19,6 +19,7 @@ namespace StatisticalMeasuresProject
         int noIterations = 1;
         TimeSpan time;
         double timeNumeric;
+        String filePath = null;
 
         public Form1()
         {
@@ -113,16 +114,21 @@ namespace StatisticalMeasuresProject
                     }
                     else
                     {
-                        textBox1.Text += "No library was chosen." + "\r\n";
+                        displayMessage("No library was chosen.");
                     }
                 }
                 else
                 {
-                    textBox1.Text += "Sample size must be greater than 0." + "\r\n";
+                    displayMessage("Sample size must be greater than 0.");
                 }
             }
             else if (dataSource == 0) // data from a csv file
             {
+                if (String.IsNullOrEmpty(filePath))
+                {
+                    displayMessage("You must choose a csv file.");
+                    return;
+                }
                 if (libraryChoice == 0) // C#
                 {
                     double[] results = new double[3];
@@ -131,7 +137,8 @@ namespace StatisticalMeasuresProject
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        results = statCal.statCalFromCsv(noThreads, false);
+                        results = statCal.statCalFromCsv(noThreads, false, filePath);
+                        
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
@@ -148,7 +155,7 @@ namespace StatisticalMeasuresProject
                         Stopwatch stopWatch = new Stopwatch();
                         stopWatch.Start();
 
-                        results = statCal.statCalFromCsv(noThreads, true);
+                        results = statCal.statCalFromCsv(noThreads, true, filePath);
 
                         stopWatch.Stop();
                         time = stopWatch.Elapsed;
@@ -159,13 +166,34 @@ namespace StatisticalMeasuresProject
                 }
                 else
                 {
-                    textBox1.Text += "No library was chosen." + "\r\n";
+                    displayMessage("No library was chosen.");
                 }
             }
             else
             {
-                textBox1.Text += "No source of data was chosen." + "\r\n";
+                displayMessage("No source of data was chosen.");
             }
+        }
+
+        private void chooseFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = "C:\\Users\\aneta\\Documents\\GitHub\\Aneta-Nowak-repo\\StatisticalMeasuresProject\\csv_files";
+            openFileDialog.Filter = "csv files (*.csv)|*.csv";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                filePath = openFileDialog.FileName;
+            }
+        }
+
+        public void displayMessage(string message)
+        {
+            textBox1.Text += message + "\r\n";
         }
     }
 }
