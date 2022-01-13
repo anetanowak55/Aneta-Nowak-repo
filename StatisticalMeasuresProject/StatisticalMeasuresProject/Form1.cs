@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,9 +16,8 @@ namespace StatisticalMeasuresProject
     {
         int dataSource = 9; // 0 - csv, 1 - random
         int libraryChoice = 9; // 0 - c#, 1 - asm
-        int noThreads = 1;
+        int noThreads = Environment.ProcessorCount;
         int noIterations = 1;
-        TimeSpan time;
         double timeNumeric;
         String filePath = null;
 
@@ -25,6 +25,7 @@ namespace StatisticalMeasuresProject
         {
             InitializeComponent();
             textBox1.ReadOnly = true;
+            threadNoNumerpicUpDown.Value = noThreads;
         }
 
         private void csvFileRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -81,6 +82,7 @@ namespace StatisticalMeasuresProject
                     if (libraryChoice == 0) // C#
                     {
                         double[] results = new double[3];
+                        TimeSpan time = new TimeSpan();
                         for (int i = 0; i < noIterations; i++)
                         {
                             Stopwatch stopWatch = new Stopwatch();
@@ -98,15 +100,17 @@ namespace StatisticalMeasuresProject
                     else if (libraryChoice == 1) // Asm
                     {
                         double[] results = new double[3];
+                        TimeSpan time = new TimeSpan();
                         for (int i = 0; i < noIterations; i++)
                         {
+                            
                             Stopwatch stopWatch = new Stopwatch();
                             stopWatch.Start();
 
                             results = statCal.statCalRndSample(sampleNo, noThreads, true);
 
                             stopWatch.Stop();
-                            time = stopWatch.Elapsed;
+                            time += stopWatch.Elapsed;
                         }
 
                         timeNumeric = time.TotalMilliseconds / noIterations;
@@ -132,6 +136,7 @@ namespace StatisticalMeasuresProject
                 if (libraryChoice == 0) // C#
                 {
                     double[] results = new double[3];
+                    TimeSpan time = new TimeSpan();
                     for (int i = 0; i < noIterations; i++)
                     {
                         Stopwatch stopWatch = new Stopwatch();
@@ -141,7 +146,7 @@ namespace StatisticalMeasuresProject
                         
 
                         stopWatch.Stop();
-                        time = stopWatch.Elapsed;
+                        time += stopWatch.Elapsed;
                     }
 
                     timeNumeric = time.TotalMilliseconds / noIterations;
@@ -150,6 +155,7 @@ namespace StatisticalMeasuresProject
                 else if (libraryChoice == 1) // Asm
                 {
                     double[] results = new double[3];
+                    TimeSpan time = new TimeSpan();
                     for (int i = 0; i < noIterations; i++)
                     {
                         Stopwatch stopWatch = new Stopwatch();
@@ -158,7 +164,7 @@ namespace StatisticalMeasuresProject
                         results = statCal.statCalFromCsv(noThreads, true, filePath);
 
                         stopWatch.Stop();
-                        time = stopWatch.Elapsed;
+                        time += stopWatch.Elapsed;
                     }
 
                     timeNumeric = time.TotalMilliseconds / noIterations;
@@ -179,7 +185,7 @@ namespace StatisticalMeasuresProject
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            openFileDialog.InitialDirectory = "C:\\Users\\aneta\\Documents\\GitHub\\Aneta-Nowak-repo\\StatisticalMeasuresProject\\csv_files";
+            openFileDialog.InitialDirectory = "C:\\Users\\aneta\\Documents\\GitHub\\Aneta-Nowak-repo\\StatisticalMeasuresProject\\test_data";
             openFileDialog.Filter = "csv files (*.csv)|*.csv";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
@@ -191,9 +197,14 @@ namespace StatisticalMeasuresProject
             }
         }
 
-        public void displayMessage(string message)
+        private void displayMessage(string message)
         {
             textBox1.Text += message + "\r\n";
+        }
+
+        private void cleanButton_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
         }
     }
 }

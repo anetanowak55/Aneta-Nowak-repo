@@ -51,6 +51,7 @@ namespace StatisticalMeasuresProject
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.noIterationsNumericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cleanButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleNoNumericUpDown)).BeginInit();
@@ -63,7 +64,7 @@ namespace StatisticalMeasuresProject
             // 
             // calculateButton
             // 
-            this.calculateButton.Location = new System.Drawing.Point(332, 325);
+            this.calculateButton.Location = new System.Drawing.Point(281, 325);
             this.calculateButton.Name = "calculateButton";
             this.calculateButton.Size = new System.Drawing.Size(103, 44);
             this.calculateButton.TabIndex = 0;
@@ -333,11 +334,22 @@ namespace StatisticalMeasuresProject
             0});
             this.noIterationsNumericUpDown1.ValueChanged += new System.EventHandler(this.noIterationsNumericUpDown1_ValueChanged);
             // 
+            // cleanButton
+            // 
+            this.cleanButton.Location = new System.Drawing.Point(414, 325);
+            this.cleanButton.Name = "cleanButton";
+            this.cleanButton.Size = new System.Drawing.Size(103, 44);
+            this.cleanButton.TabIndex = 16;
+            this.cleanButton.Text = "Clean console";
+            this.cleanButton.UseVisualStyleBackColor = true;
+            this.cleanButton.Click += new System.EventHandler(this.cleanButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 650);
+            this.Controls.Add(this.cleanButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox4);
@@ -389,6 +401,7 @@ namespace StatisticalMeasuresProject
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown noIterationsNumericUpDown1;
+        private System.Windows.Forms.Button cleanButton;
     }
 }
 

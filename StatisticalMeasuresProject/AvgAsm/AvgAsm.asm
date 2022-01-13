@@ -8,9 +8,26 @@ AvgDevAsm proc
 ; int end -> R9
 ; ref double result -> XMM0
 
-MOV RAX, R8
-VBROADCASTSD YMM3, XMM1				; broadcast a floating point value from XMM1 to four locations in YMM3
+MOV RAX, R8							; go to the correct index in the array
+IMUL RAX, 8
+ADD RCX, RAX
+
+MOV RAX, R8							; start loop at start index
+
+VXORPS ymm6, ymm6, ymm6				; make sure ymm6 is empty
 VXORPS ymm9, ymm9, ymm9				; make sure ymm9 is empty
+
+VXORPS ymm8, ymm8, ymm8
+VXORPS ymm2, ymm2, ymm2
+VXORPS ymm3, ymm3, ymm3
+VXORPS ymm4, ymm4, ymm4
+VXORPS ymm7, ymm7, ymm7
+VXORPS ymm6, ymm6, ymm6
+VXORPS ymm10, ymm10, ymm10
+VXORPS ymm11, ymm11, ymm11
+VXORPS ymm0, ymm0, ymm0
+
+VBROADCASTSD YMM3, XMM1	; broadcast a floating point value from XMM1 to four locations in YMM3
 
 add_records_loop:
 	CMP RAX, R9						; check if reached the end

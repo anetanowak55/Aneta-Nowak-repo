@@ -16,30 +16,38 @@ namespace StatisticalMeasuresProject
             taskList.Clear();
 
             int arrayLength = array.Length;
-            if (threadsNo > arrayLength)
-                threadsNo = arrayLength;
-
             int recordsPerThread = arrayLength / threadsNo;
             int leftoverRecords = arrayLength % threadsNo;
 
             int start = 0;
+
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start, start + recordsPerThread + leftoverRecords, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread + leftoverRecords;
+                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                //Console.WriteLine(start.ToString() + " " + end.ToString());
+                start = end;
             }
             else
             {
-                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start, start + recordsPerThread, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread;
+                Task firstTask = new Task(() => { StatCal.calculateArraySum(array, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                //Console.WriteLine(start.ToString() + " " + end.ToString());
+                start = end;
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StatCal.calculateArraySum(array, start_cpy, start_cpy + recordsPerThread, ref result); });
+                int end = start + recordsPerThread;
+                Task task = new Task(() => { StatCal.calculateArraySum(array, start_cpy, end, ref result); });
                 taskList.Add(task);
-                start += recordsPerThread;
+                //Console.WriteLine(start.ToString() + " " + end.ToString());
+                start = end;
             }
 
         }
@@ -48,31 +56,35 @@ namespace StatisticalMeasuresProject
         {
             taskList.Clear();
 
-            int arrayLength = array.Length - added_zeros;
-            if (threadsNo > arrayLength)
-                threadsNo = arrayLength;
-
+            int arrayLength = array.Length;
             int recordsPerThread = arrayLength / threadsNo;
             int leftoverRecords = arrayLength % threadsNo;
 
             int start = 0;
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread + leftoverRecords;
+                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                start = end;
             }
             else
             {
-                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start, start + recordsPerThread, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread;
+                Task firstTask = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                start = end;
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
+                int end = start + recordsPerThread;
+                Task task = new Task(() => { StatCal.calculateSumOfSqDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(task);
-                start += recordsPerThread;
+                start = end;
             }
         }
 
@@ -80,31 +92,35 @@ namespace StatisticalMeasuresProject
         {
             taskList.Clear();
 
-            int arrayLength = array.Length - added_zeros;
-            if (threadsNo > arrayLength)
-                threadsNo = arrayLength;
-
+            int arrayLength = array.Length;
             int recordsPerThread = arrayLength / threadsNo;
             int leftoverRecords = arrayLength % threadsNo;
 
             int start = 0;
             if (leftoverRecords != 0)
             {
-                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start, start + recordsPerThread + leftoverRecords, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread + leftoverRecords;
+                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                start = end;
             }
             else
             {
-                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start, start + recordsPerThread, ref result); });
+                int start_cpy = start;
+                int end = start + recordsPerThread;
+                Task firstTask = new Task(() => { StatCal.calculateSumOfDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(firstTask);
+                start = end;
             }
 
             for (int i = 1; i < threadsNo; i++)
             {
                 int start_cpy = start;
-                Task task = new Task(() => { StatCal.calculateSumOfDif(array, avg, start_cpy, start_cpy + recordsPerThread, ref result); });
+                int end = start + recordsPerThread;
+                Task task = new Task(() => { StatCal.calculateSumOfDif(array, avg, start_cpy, end, ref result); });
                 taskList.Add(task);
-                start += recordsPerThread;
+                start = end;
             }
         }
 

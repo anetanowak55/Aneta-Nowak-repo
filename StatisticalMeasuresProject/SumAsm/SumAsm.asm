@@ -5,9 +5,14 @@ SumAsm proc
 ; double[] array -> RCX
 ; int start -> RDX
 ; int end -> R8
-; ref double result -> XMM0
 
-MOV RAX, RDX
+VXORPS YMM3, YMM3, YMM3				; make sure ymm3 is empty
+
+MOV RAX, RDX						; go to the correct index in the array
+IMUL RAX, 8
+ADD RCX, RAX
+
+MOV RAX, RDX						; start loop at start index
 
 add_records_loop:
 	CMP RAX, R8

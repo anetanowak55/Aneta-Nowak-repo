@@ -11,17 +11,18 @@ namespace StatisticalMeasuresProject
     class StatCal
     {
         [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\SumAsm.dll")]
-        static extern double SumAsm(double[] array, int start, int end, ref double result);
+        static extern double SumAsm(double[] array, int start, int end);
         [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\StdAsm.dll")]
-        static extern double StdDevAsm(double[] array, double avg, int start, int end, ref double result);
+        static extern double StdDevAsm(double[] array, double avg, int start, int end);
         [DllImport(@"C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\x64\Debug\AvgAsm.dll")]
-        static extern double AvgDevAsm(double[] array, double avg, int start, int end, ref double result);
+        static extern double AvgDevAsm(double[] array, double avg, int start, int end);
 
         public static bool is_asm;
         static int no_threads;
         static int added_zeros = 0;
         double array_avg = 0;
         readonly int no_decimal_places = 4;
+        private static object lockObject = new object();
 
         /**
          * Calculates the sum of values in an array - a task for one of the threads.
@@ -35,14 +36,25 @@ namespace StatisticalMeasuresProject
         {
             if (is_asm == false)
             {
-                for (int i = start; i < end; i++)
+                lock (lockObject)
                 {
-                    result += array[i];
+                    double t = 0;
+                    for (int i = start; i < end; i++)
+                    {
+                        t += array[i];
+                    }
+                    result += t;
+                    //Console.WriteLine(t);
                 }
             }
             else
             {
-                result = SumAsm(array, start, end, ref result);
+                lock (lockObject)
+                {
+                    double temp_result = SumAsm(array, start, end - 1);
+                    result += temp_result;
+                    //Console.WriteLine(temp_result);
+                }
             }
         }
 
@@ -76,6 +88,12 @@ namespace StatisticalMeasuresProject
             TaskManager.calculateStdDevTasks(no_threads, array, array_avg, added_zeros);
             double squares_sum = TaskManager.start();
 
+            if (is_asm)
+            {
+                double zeros_adjustment = added_zeros * Math.Pow(0 - array_avg, 2);
+                squares_sum -= zeros_adjustment;
+            }
+
             result = Math.Sqrt(squares_sum / (array.Length - added_zeros));
 
             return result;
@@ -93,6 +111,12 @@ namespace StatisticalMeasuresProject
             TaskManager.calculateAvgDevTasks(no_threads, array, array_avg, added_zeros);
             double dif_sum = TaskManager.start();
 
+            if (is_asm)
+            {
+                double zeros_adjustment = added_zeros * array_avg;
+                dif_sum -= zeros_adjustment;
+            }
+
             return dif_sum / (array.Length - added_zeros);
         }
 
@@ -109,17 +133,23 @@ namespace StatisticalMeasuresProject
         {
             if (is_asm == false)
             {
-                for (int i = start; i < end; i++)
+                lock (lockObject)
                 {
-                    result += Math.Abs(array[i] - avg);
+                    double temp_result = 0;
+                    for (int i = start; i < end; i++)
+                    {
+                        temp_result += Math.Abs(array[i] - avg);
+                    }
+                    result += temp_result;
                 }
             }
             else
             {
-                result = AvgDevAsm(array, avg, start, end, ref result);
-
-                double zeros_adjustment = added_zeros * avg;
-                result -= zeros_adjustment;
+                lock (lockObject)
+                {
+                    double temp_result = AvgDevAsm(array, avg, start, end - 1);
+                    result += temp_result;
+                }
             }
         }
 
@@ -136,17 +166,21 @@ namespace StatisticalMeasuresProject
         {
             if (is_asm == false)
             {
-                for (int i = start; i < end; i++)
+                lock (lockObject)
                 {
-                    result += Math.Pow(array[i] - avg, 2);
+                    for (int i = start; i < end; i++)
+                    {
+                        result += Math.Pow(array[i] - avg, 2);
+                    }
                 }
             }
             else
             {
-                result = StdDevAsm(array, avg, start, end, ref result); 
-
-                double zeros_adjustment = added_zeros * Math.Pow(0 - avg, 2);
-                result -= zeros_adjustment;
+                lock (lockObject)
+                {
+                    double temp_result = StdDevAsm(array, avg, start, end - 1);
+                    result += temp_result;
+                }
             }
         }
 
@@ -180,8 +214,8 @@ namespace StatisticalMeasuresProject
                 array[sample_size + i] = 0;
             }
 
-            for (int i = 0; i < array.Length; i++)
-                Console.WriteLine(array[i] + " ");
+            //for (int i = 0; i < array.Length; i++)
+                //Console.WriteLine(array[i] + " ");
 
             double[] results = new double[3];
             results[0] = Math.Round(calculateStdDev(array), no_decimal_places);
@@ -206,13 +240,26 @@ namespace StatisticalMeasuresProject
 
             List<double> list = csvParser.readCsv(filePath);
 
-            if (list.Count % 4 != 0)
+            int listLength = list.Count;
+            if (no_thread > listLength)
+                no_thread = listLength;
+
+            int recordsPerThread = listLength / no_thread;
+            int leftoverRecords = listLength % no_thread;
+            int rPTdiv4 = recordsPerThread % 4;
+
+            if (rPTdiv4 == 0)
             {
-                added_zeros = 4 - list.Count % 4;
-                for (int i = 0; i < added_zeros; i++)
-                {
-                    list.Add(0);
-                }
+                added_zeros = 4 - leftoverRecords;
+            }
+            else
+            {
+                added_zeros = (4 - rPTdiv4) * no_thread - leftoverRecords;
+            }
+
+            for (int i = 0; i < added_zeros; i++)
+            {
+                list.Add(0);
             }
 
             double[] array = csvParser.listToArray(list);

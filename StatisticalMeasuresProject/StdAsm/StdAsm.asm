@@ -8,7 +8,14 @@ StdDevAsm proc
 ; int end -> R9
 ; ref double result -> XMM0
 
-MOV RAX, R8
+MOV RAX, R8							; go to the correct index in the array
+IMUL RAX, 8
+ADD RCX, RAX
+
+MOV RAX, R8							; start loop at start index
+
+VXORPS ymm6, ymm6, ymm6				; make sure ymm6 is empty
+
 VBROADCASTSD YMM3, XMM1				; broadcast a floating point value from XMM1 to four locations in YMM3
 
 add_records_loop:
