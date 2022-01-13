@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using Calculations;
 
 namespace StatisticalMeasuresProject
 {
@@ -38,22 +39,14 @@ namespace StatisticalMeasuresProject
             {
                 lock (lockObject)
                 {
-                    double t = 0;
-                    for (int i = start; i < end; i++)
-                    {
-                        t += array[i];
-                    }
-                    result += t;
-                    //Console.WriteLine(t);
+                    result += calculate.Sum(array, start, end);
                 }
             }
             else
             {
                 lock (lockObject)
                 {
-                    double temp_result = SumAsm(array, start, end - 1);
-                    result += temp_result;
-                    //Console.WriteLine(temp_result);
+                    result += SumAsm(array, start, end - 1);
                 }
             }
         }
@@ -135,20 +128,14 @@ namespace StatisticalMeasuresProject
             {
                 lock (lockObject)
                 {
-                    double temp_result = 0;
-                    for (int i = start; i < end; i++)
-                    {
-                        temp_result += Math.Abs(array[i] - avg);
-                    }
-                    result += temp_result;
+                    result += calculate.SumOfDif(array, avg, start, end);
                 }
             }
             else
             {
                 lock (lockObject)
                 {
-                    double temp_result = AvgDevAsm(array, avg, start, end - 1);
-                    result += temp_result;
+                    result += AvgDevAsm(array, avg, start, end - 1);
                 }
             }
         }
@@ -168,18 +155,14 @@ namespace StatisticalMeasuresProject
             {
                 lock (lockObject)
                 {
-                    for (int i = start; i < end; i++)
-                    {
-                        result += Math.Pow(array[i] - avg, 2);
-                    }
+                    result += calculate.SumOfSqDif(array, avg, start, end);
                 }
             }
             else
             {
                 lock (lockObject)
                 {
-                    double temp_result = StdDevAsm(array, avg, start, end - 1);
-                    result += temp_result;
+                    result += StdDevAsm(array, avg, start, end - 1);
                 }
             }
         }

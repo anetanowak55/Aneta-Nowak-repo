@@ -8,3 +8,6 @@ C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Stat
 C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\x64\Debug\StatisticalMeasuresProject.exe
 C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\x64\Debug\StatisticalMeasuresProject.pdb
 C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\x64\Debug\StatisticalMeasuresProject.csproj.AssemblyReference.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\bin\x64\Debug\Calculations.dll
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\bin\x64\Debug\Calculations.pdb
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\StatisticalMeasuresProject\obj\x64\Debug\StatisticalMeasuresProject.csproj.CopyComplete

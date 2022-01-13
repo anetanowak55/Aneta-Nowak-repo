@@ -1,0 +1,8 @@
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\bin\Debug\netcoreapp3.1\OperationsCs.deps.json
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\bin\Debug\netcoreapp3.1\OperationsCs.dll
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\bin\Debug\netcoreapp3.1\OperationsCs.pdb
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\obj\Debug\netcoreapp3.1\OperationsCs.AssemblyInfoInputs.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\obj\Debug\netcoreapp3.1\OperationsCs.AssemblyInfo.cs
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\obj\Debug\netcoreapp3.1\OperationsCs.csproj.CoreCompileInputs.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\obj\Debug\netcoreapp3.1\OperationsCs.dll
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\OperationsCs\obj\Debug\netcoreapp3.1\OperationsCs.pdb

@@ -1,0 +1,5 @@
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Calculations\bin\Debug\Calculations.dll
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Calculations\bin\Debug\Calculations.pdb
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Calculations\obj\Debug\Calculations.csproj.CoreCompileInputs.cache
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Calculations\obj\Debug\Calculations.dll
+C:\Users\aneta\Documents\GitHub\Aneta-Nowak-repo\StatisticalMeasuresProject\Calculations\obj\Debug\Calculations.pdb
